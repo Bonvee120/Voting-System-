@@ -9,123 +9,277 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body class="bg-slate-100">
-    <!-- Navigation -->
-    <header 
-    
-    
+  <body class="bg-slate-100 min-h-screen flex flex-col">
 
-    class="bg-orange-900 text-white">
-    <div class="max-w-6xl mx-auto flex justify-between items-center p-5">
+    <header class="bg-orange-900 text-white">
+      <div class="max-w-6xl mx-auto flex justify-between items-center p-3">
 
-    <img src="cropped-apf_logo2.png " alt="A descriptive sentence about the image">
-
+        <img
+          src="img/logo.png"
+          alt="AfricaPlan Foundation Logo"
+          class="h-20 w-auto"
+        />
 
         <p class="font-semibold">HOH Voting Platform</p>
       </div>
     </header>
 
-    <div class="min-h-screen flex items-center justify-center px-5 ">
-      <div class="bg-white rounded-3xl shadow-xl p-10 w-full max-w-2xl ">
-          <h2 class="text-3xl font-bold text-center">Cast Your Vote</h2>
+
+    
+    <main class="flex-1">
+
+      
+      <section class="px-5 py-10">
+
+        <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-2xl mx-auto">
+
+          <h2 class="text-3xl font-bold text-center">
+            Cast Your Vote
+          </h2>
 
           <p class="text-center text-gray-500 mt-2">
             Choose your next Head of House Candidate.
           </p>
 
-          <div class="mt-8 space-y-6">
+
+        
+          <form id="votingForm" class="mt-6 space-y-5">
+
+            
             <div>
-              <label class="font-semibold"> Select Voter </label>
+              <label
+                for="voterSelect"
+                class="font-semibold block"
+              >
+                Select Voter
+              </label>
 
               <select
-                class="mt-2 w-full border rounded-xl p-3 focus:ring-2 focus:ring-blue-500"
+                id="voterSelect"
+                class="mt-2 w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option>Select your name</option>
+                <option value="">
+                  Select your name
+                </option>
 
-                <option>Stephanie </option>
-                <option>Abigail</option>
-                <option>James</option>
-                <option>Gaberial</option>
-                <option>Lilian</option>
-                <option>Kosi</option>
-                <option>Bonaventure</option>
-                <option>Ifeanyi</option>
-                <option>Chidinma</option>
-                <option>Majesty</option>
-                <option>Christopher</option>
-                <option>Peter</option>
-                <option>Victor</option>
-                <option>David</option>
-                <option>loveth</option>
-                <option>Charlse</option>
-                <option>Augustine</option>
-                <option>James</option>
-                <option>Anthony</option>
+                <option value="Stephanie">Stephanie</option>
+                <option value="Abigail">Abigail</option>
+                <option value="James">James</option>
+                <option value="Gaberial">Gaberial</option>
+                <option value="Lilian">Lilian</option>
+                <option value="Kosi">Kosi</option>
+                <option value="Bonaventure">Bonaventure</option>
+                <option value="Ifeanyi">Ifeanyi</option>
+                <option value="Chidinma">Chidinma</option>
+                <option value="Majesty">Majesty</option>
+                <option value="Christopher">Christopher</option>
+                <option value="Peter">Peter</option>
+                <option value="Victor">Victor</option>
+                <option value="David">David</option>
+                <option value="Loveth">Loveth</option>
+                <option value="Charlse">Charlse</option>
+                <option value="Augustine">Augustine</option>
+                <option value="Anthony">Anthony</option>
               </select>
             </div>
 
+
             <div>
-              <label class="font-semibold"> Select Candidate </label>
+              <label
+                for="candidateSelect"
+                class="font-semibold block"
+              >
+                Select Candidate
+              </label>
 
               <select
-                class="mt-2 w-full border rounded-xl p-3 focus:ring-2 focus:ring-green-500"
+                id="candidateSelect"
+                class="mt-2 w-full border border-gray-300 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
-                <option>Select Candidate</option>
+                <option value="">
+                  Select Candidate
+                </option>
 
-                <option> Kosi </option>
-                <option> Augustine </option>
+                <option value="Kosi">Kosi</option>
+                <option value="Augustine">Augustine</option>
               </select>
             </div>
 
             <button
+              id="submitVoteButton"
+              type="submit"
               class="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-xl text-lg font-bold"
             >
               Submit Vote
             </button>
 
+          </form>
+
+          <p
+            id="votingMessage"
+            class="mt-4 text-center font-semibold"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+      </section>
+
+
+      <section class="max-w-6xl mx-auto w-full px-5 py-6">
+
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+          <button
+            id="checkResultButton"
+            type="button"
+            class="rounded-md bg-red-800 px-6 py-3 text-sm font-semibold text-white hover:bg-red-900 transition"
+          >
+            Checking Result
+          </button>
+
+
+          <div class="bg-amber-900 rounded-lg px-6 py-4 text-white shadow-md">
+
+            <h3 class="font-semibold text-lg mb-2">
+              Voter Count
+            </h3>
+
+            <p>
+              <span id="candidateOneName">Kosi</span>:
+              <span id="candidateOneScore">0</span>
+            </p>
+
+            <p>
+              <span id="candidateTwoName">Augustine</span>:
+              <span id="candidateTwoScore">0</span>
+            </p>
+
+            <p class="mt-2 text-sm border-t border-white/20 pt-2">
+              Total Votes:
+              <span id="totalVoteCount">0</span>/20
+            </p>
+
           </div>
-      </div>
-    </div>
 
-<button command="show-modal" commandfor="dialog" class="rounded-md bg-red-800 px-7 py-5 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-black m-20 p-16 ">Checking result</button>
-<el-dialog>
-  <dialog id="dialog" aria-labelledby="dialog-title" class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent">
-    <el-dialog-backdrop class="fixed inset-0 bg-gray-900/50 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"></el-dialog-backdrop>
+        </div>
 
-    <div tabindex="0" class="flex min-h-full items-end justify-center p-4 text-center focus:outline-none sm:items-center sm:p-0">
-      <el-dialog-panel class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl outline -outline-offset-1 outline-white/10 transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
-        <div class="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-            <div class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-500/10 sm:mx-0 sm:size-10">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 text-red-400">
-                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 id="dialog-title" class="text-base font-semibold text-white">ELECTION WINNER</h3>
-              <div class="mt-2">
-                <p class="text-sm text-gray-400">THE WINNER OF THE ELECTION IS:</p>
+      </section>
+
+
+
+      <dialog
+        id="dialog"
+        aria-labelledby="dialog-title"
+        class="fixed inset-0 size-auto max-h-none max-w-none overflow-y-auto bg-transparent backdrop:bg-transparent"
+      >
+
+        <div
+          class="fixed inset-0 bg-gray-900/50"
+          aria-hidden="true"
+        ></div>
+
+
+        <div
+          tabindex="0"
+          class="flex min-h-full items-center justify-center p-4 text-center focus:outline-none"
+        >
+
+          <div
+            class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl outline -outline-offset-1 outline-white/10 w-full max-w-lg"
+          >
+
+            <div class="bg-gray-800 px-6 py-6">
+
+              <div class="flex items-start gap-4">
+
+                <div
+                  class="flex size-10 shrink-0 items-center justify-center rounded-full bg-red-500/10"
+                >
+
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    class="size-6 text-red-400"
+                  >
+                    <path
+                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+
+                </div>
+
+
+                <div>
+
+                  <h3
+                    id="dialog-title"
+                    class="text-base font-semibold text-white"
+                  >
+                    ELECTION WINNER
+                  </h3>
+
+                  <p class="mt-2 text-sm text-gray-400">
+                    THE WINNER OF THE ELECTION IS:
+                  </p>
+
+                  <!-- Dynamic Result -->
+                  <div
+                    id="resultContent"
+                    class="mt-4 text-xl font-bold text-white"
+                    aria-live="polite"
+                  >
+                    No result available yet.
+                  </div>
+
+                </div>
+
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="bg-gray-700/25 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-          <button type="button" command="close" commandfor="dialog" class="inline-flex w-full justify-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white hover:bg-red-400 sm:ml-3 sm:w-auto">Close</button>
-          
-        </div>
-      </el-dialog-panel>
-    </div>
-  </dialog>
-</el-dialog>
-      
 
- <div class=" flex justify-end w-full ">
-  <card class="bg-amber-900 rounded px-4 py-2 mx-4 text-white text- font-[Open_Sans]">
-  <h>Voter Count</h>
-  <p>Candidate 1:</p>
-  <p>Candidates 2:</p>
-</card>
- </div>
-    
+            </div>
+
+
+
+            <div class="bg-gray-700/25 px-6 py-4 flex justify-end">
+
+              <button
+                id="closeDialogButton"
+                type="button"
+                class="rounded-md bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-400"
+              >
+                Close
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </dialog>
+
+    </main>
+
+
+    <footer class="bg-orange-900 text-white py-4">
+
+      <div class="max-w-6xl mx-auto text-center">
+
+        <p>
+          &copy; 2024 HOH Voting Platform. All rights reserved.
+        </p>
+
+      </div>
+
+    </footer>
+
+
+
+    <script type="module" src="../dist/voting.js"></script>
+
   </body>
 </html>
